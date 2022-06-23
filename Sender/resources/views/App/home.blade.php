@@ -18,7 +18,7 @@
                 <div class="card-body">
                   <h5 class="card-title"> {{ __(' Add New Sender ')}}</h5>
                   <p class="card-text">{{__('This is For Create New Sender')}} </p>
-                  <a href="#" class="btn btn-success"> {{ __('Create Now ')}}</a>
+                  <a href="{{route('sender.create')}}" class="btn btn-success"> {{ __('Create Now ')}}</a>
                 </div>
               </div>
             </div>

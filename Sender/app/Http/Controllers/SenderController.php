@@ -29,7 +29,14 @@ class SenderController extends Controller
      */
     public function create()
     {
-        //
+        $types = [
+            '1' => __('Cooking'),
+            '2' => __('Programming'),
+            '3' => __('Football'),
+            '4' => __('news'),
+        ];
+
+        return view('App.create',compact('types'));
     }
 
     /**
@@ -40,7 +47,7 @@ class SenderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**
