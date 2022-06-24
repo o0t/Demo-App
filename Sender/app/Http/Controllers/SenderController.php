@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SenderMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SenderController extends Controller
 {
@@ -30,10 +32,11 @@ class SenderController extends Controller
     public function create()
     {
         $types = [
-            '1' => __('Cooking'),
-            '2' => __('Programming'),
-            '3' => __('Football'),
-            '4' => __('news'),
+            'Cooking' => __('Cooking'),
+            'Programming' => __('Programming'),
+            'Football' => __('Football'),
+            'news' => __('news'),
+            'other' => __('other'),
         ];
 
         return view('App.create',compact('types'));
@@ -47,7 +50,34 @@ class SenderController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:30',
+            'type' => 'string|required',
+            'sender' => 'required|string|max:255|min:10',
+        ],
+        [
+            'title.required' => __('Please write the title'),
+            'sender.required' => __('Please type the message field'),
+            'title.max' => __('The title may not be greater than 30 characters'),
+            'sender.max' => __('The sender may not be greater than 255 characters'),
+            'sender.min' => __('The sender must be at least 10 characters'),
+        ]);
+
+        $user_id = Auth::user()->id;
+        $title = $request->input('title');
+        $type = $request->input('type');
+        $senderMessage = $request->input('sender');
+
+        $sender = new SenderMessage();
+        $sender->user_id = $user_id;
+        $sender->title = $title;
+        $sender->type = $type;
+        $sender->sender_message = $senderMessage;
+        $sender->save();
+
+        return redirect()->back()->with('status',__('The message has been posted'));
+
     }
 
     /**
