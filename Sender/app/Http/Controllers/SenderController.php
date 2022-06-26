@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SenderMessage;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -78,6 +79,14 @@ class SenderController extends Controller
 
         return redirect()->back()->with('status',__('The message has been posted'));
 
+    }
+
+
+    public function New(){
+
+        $SenderMessage = SenderMessage::select('*')->orderBy('created_at', 'desc')->take(6)->get();
+        // $SenderMessage = SenderMessage::all();
+        return view('App.show' , compact('SenderMessage'));
     }
 
     /**

@@ -17,9 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Profile user
+Route::get('me', [App\Http\Controllers\MeController::class, 'index']);
+// Route::get('me', 'App\Http\Controllers\MeController');
 
+// sender
 Route::resource('sender', 'App\Http\Controllers\SenderController');
-
+Route::get('Sender', 'App\Http\Controllers\SenderController@New')->name('new');
 
 Auth::routes();
 

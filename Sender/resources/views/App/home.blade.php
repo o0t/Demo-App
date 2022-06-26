@@ -6,8 +6,8 @@
 
 @section('content')
 
-        <br><br><br>
 
+        <br><br><br>
         {{-- Cards --}}
         <div class="row row-cols-1 row-cols-md-2 g-4">
             <div class="col">
@@ -30,7 +30,7 @@
                 <div class="card-body">
                   <h5 class="card-title"> {{ __('Take a look at the latest Sender Message ')}}</h5>
                   <p class="card-text"> {{ __('There are a lot of new messages on all topics .')}}</p>
-                  <a href="#" class="btn btn-info"> {{ __('Show Now ')}}</a>
+                  <a href={{ Route('new') }} class="btn btn-info"> {{ __('Show Now ')}}</a>
                 </div>
               </div>
             </div>
